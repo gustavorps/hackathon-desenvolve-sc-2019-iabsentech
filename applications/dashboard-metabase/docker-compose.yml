@@ -1,0 +1,52 @@
+version: "3"
+services:
+
+  db-postgres:
+    image: postgres:9.6
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - ./.data-postgresql:/var/lib/postgresql/data
+      - ./scripts/postgres-init.sql:/docker-entrypoint-initdb.d/init.sql
+    # resources:
+    #   limits:
+    #     cpus: '1'
+    #     memory: 256M
+    #   reservations:
+    #     cpus: '1'
+    #     memory: 256M
+
+  metabase-app:
+    image: metabase/metabase:v0.33.4
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - ./.data-metabase:/metabase-data
+      - ./metabase/plugins:/plugins
+    environment:
+      JAVA_OPTS: '-Xmx265m -Xms256m'
+      JAVA_TIMEZONE: America/Sao_Paulo
+      MB_DB_FILE: /metabase-data/metabase.db
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabase
+      MB_DB_PORT: 5432
+      MB_DB_USER: postgres
+      MB_DB_PASS: postgres
+      MB_DB_HOST: db-postgres
+    depends_on:
+      - db-postgres
+    links:
+      - db-postgres
+    # resources:
+    #   limits:
+    #     cpus: '1'
+    #     memory: 256M
+    #   reservations:
+    #     cpus: '1'
+    #     memory: 256M
