@@ -1,6 +1,11 @@
 # Hackathon Desenvolve SC 2019: IAbsentech
 
-Prototipo para investigação e monitoramento de absenteísmo com dados da secretária de saúde do estado de Santa Caratina
+Prototipo para investigação e monitoramento de absenteísmo com dados da secretária de saúde do estado de Santa Catarina
+
+## Isenção de responsabilidade
+Todos os dados utilizados no projeto foram compartilhados através dos funcionários da secretária de saúde do estado de Santa Catarina, e foram utilizados em sua integra sem nenhuma alteração da parte do autor.
+
+Sendo assim o autor se insenta de qualquer responsabilidade de utilização futura dos dados em outras pesquisas ou autores.
 
 ## Citação
 
